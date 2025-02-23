@@ -1,0 +1,48 @@
+[2025-02-23 14:02:31.918845] 
+[2025-02-23 14:02:32.217784] 
+[2025-02-23 14:02:32.217784] 
+[2025-02-23 14:02:32.369354] 
+[2025-02-23 14:02:32.369354] ⚡ Attempting WMI subscription setup via SYSTEM context...
+[2025-02-23 14:02:32.489673] ✅ WMI subscriptions created via SYSTEM context. Detection log at: C:\Users\RANDY~1.OBR\AppData\Local\Temp\ShellClawDetection.log
+[2025-02-23 14:02:50.838469] 
+[2025-02-23 14:02:51.134138] 
+[2025-02-23 14:02:51.134138] 
+[2025-02-23 14:02:51.281905] 
+[2025-02-23 14:02:51.281905] ⚡ Attempting WMI subscription setup via SYSTEM context...
+[2025-02-23 14:02:51.394662] ✅ WMI subscriptions created via SYSTEM context. Detection log at: C:\Users\RANDY~1.OBR\AppData\Local\Temp\ShellClawDetection.log
+[2025-02-23 14:07:01.820327] 
+[2025-02-23 14:07:02.131247] 
+[2025-02-23 14:07:02.131247] 
+[2025-02-23 14:07:02.286696] 
+[2025-02-23 14:07:02.286696] ⚡ Attempting WMI subscription setup via SYSTEM context...
+[2025-02-23 14:07:02.407949] ✅ WMI subscriptions created via SYSTEM context. Detection log at: C:\Users\RANDY~1.OBR\AppData\Local\Temp\ShellClawDetection.log
+[2025-02-23 14:31:22.959962] 
+[2025-02-23 14:31:23.259608] 
+[2025-02-23 14:31:23.259608] 
+[2025-02-23 14:31:23.419831] 
+[2025-02-23 14:31:23.419831] ⚡ Attempting WMI subscription setup via SYSTEM context...
+[2025-02-23 14:31:23.526280] ✅ WMI subscriptions created via SYSTEM context. Detection log at: C:\Users\RANDY~1.OBR\AppData\Local\Temp\ShellClawDetection.log
+[2025-02-23 14:33:33.443238] 
+[2025-02-23 14:33:33.746110] 
+[2025-02-23 14:33:33.746110] 
+[2025-02-23 14:33:33.896502] 
+[2025-02-23 14:33:33.896502] ⚡ Setting up ShellClaw WMI detection...
+[2025-02-23 14:33:34.470336] ✅ ShellClaw real-time detection is fully operational.
+[2025-02-23 14:50:44.244339] 
+[2025-02-23 14:50:44.560867] 
+[2025-02-23 14:50:44.560867] 
+[2025-02-23 14:50:44.721255] 
+[2025-02-23 14:50:44.722256] ⚡ Setting up ShellClaw WMI detection...
+[2025-02-23 14:50:45.510245] ✅ ShellClaw real-time detection is fully operational.
+[2025-02-23 14:56:06.617363] 
+[2025-02-23 14:56:06.914635] 
+[2025-02-23 14:56:06.914635] 
+[2025-02-23 14:56:07.064632] 
+[2025-02-23 14:56:07.065632] ⚡ Setting up ShellClaw WMI detection...
+[2025-02-23 14:56:07.374895] ✅ ShellClaw real-time detection is fully operational.
+[2025-02-23 15:06:07.578945] 
+[2025-02-23 15:06:07.883425] 
+[2025-02-23 15:06:07.883425] 
+[2025-02-23 15:06:08.037010] 
+[2025-02-23 15:06:08.038009] ⚡ Setting up ShellClaw WMI detection...
+[2025-02-23 15:06:08.329766] ✅ ShellClaw real-time detection is fully operational.

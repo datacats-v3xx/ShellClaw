@@ -1,0 +1,4 @@
+[2025-02-23 15:39:32.111483] ✅ Setting applied: set_execution_policy
+[2025-02-23 15:39:32.433605] ✅ Setting applied: enable_logging
+[2025-02-23 15:39:32.580336] ✅ Setting applied: disable_ps_v2
+[2025-02-23 15:39:32.580336] 🏠 ✅ Personal Mode: All settings applied.

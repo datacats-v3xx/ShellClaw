@@ -1,0 +1,4 @@
+pywin32
+wmi
+PyQt5
+qdarkstyle
