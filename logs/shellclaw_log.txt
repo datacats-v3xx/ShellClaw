@@ -46,3 +46,33 @@
 [2025-02-23 15:06:08.037010] 
 [2025-02-23 15:06:08.038009] ⚡ Setting up ShellClaw WMI detection...
 [2025-02-23 15:06:08.329766] ✅ ShellClaw real-time detection is fully operational.
+[2025-02-24 22:07:13] ⚡ Setting up advanced PowerShell detection...
+[2025-02-24 22:07:13] ✅ Advanced PowerShell detection operational.
+[2025-02-24 22:09:49] ⚡ Setting up advanced PowerShell detection...
+[2025-02-24 22:09:49] ✅ Advanced PowerShell detection operational.
+[2025-02-24 22:09:49] ✅ ShellClawUI Initialized
+[2025-02-24 22:10:02] ⚡ Setting up WMI PowerShell detection...
+[2025-02-24 22:10:02] ✅ WMI detection operational.
+[2025-02-24 22:10:03] ⚡ Setting up WMI PowerShell detection...
+[2025-02-24 22:10:04] ✅ WMI detection operational.
+[2025-02-25 22:52:53] ✅ ShellClawUI Initialized
+[2025-02-25 22:53:49] ✅ ShellClawUI Initialized
+[2025-02-25 23:14:27] Test log entry from MinimalShellClaw
+[2025-02-25 23:14:34] ✅ Master hardening module loaded successfully.
+[2025-02-25 23:30:02] ✅ ShellClawUI Initialized
+[2025-02-25 23:37:58] ✅ ShellClawUI Initialized
+[2025-02-25 23:52:17] ✅ ShellClawUI Initialized
+[2025-02-25 23:54:43] ✅ ShellClawUI Initialized
+[2025-02-25 23:57:39] ✅ ShellClawUI Initialized
+[2025-02-26 00:00:31] ✅ ShellClawUI Initialized
+[2025-02-26 00:00:31] ✅ ShellClawUI Initialized
+[2025-02-26 00:00:32] ✅ ShellClawUI Initialized
+[2025-02-26 00:00:32] ✅ ShellClawUI Initialized
+[2025-02-26 00:07:51] ✅ ShellClawUI Initialized
+[2025-02-26 00:10:52] ✅ ShellClawUI Initialized
+[2025-02-26 00:13:06] ✅ ShellClawUI Initialized
+[2025-02-26 00:17:24] ✅ ShellClawUI Initialized
+[2025-02-26 00:20:11] ✅ ShellClawUI Initialized
+[2025-02-26 19:19:56] ✅ ShellClawUI Initialized
+[2025-02-26 19:20:03] ✅ ShellClawUI Initialized
+[2025-02-26 19:20:22] ✅ ShellClawUI Initialized

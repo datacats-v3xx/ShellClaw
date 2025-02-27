@@ -2,3 +2,58 @@
 [2025-02-23 15:39:32.433605] ✅ Setting applied: enable_logging
 [2025-02-23 15:39:32.580336] ✅ Setting applied: disable_ps_v2
 [2025-02-23 15:39:32.580336] 🏠 ✅ Personal Mode: All settings applied.
+[2025-02-23 15:50:17.170358] 🏠 ✅ Personal Mode: All settings applied.
+[2025-02-23 15:50:23.637633] 🏠 ✅ Personal Mode: All settings applied.
+[2025-02-23 15:50:43.090933] ✅ Setting applied: set_execution_policy
+[2025-02-23 15:50:43.389012] ✅ Setting applied: enable_logging
+[2025-02-23 15:50:43.540953] ✅ Setting applied: disable_ps_v2
+[2025-02-23 15:50:43.541963] 🏠 ✅ Personal Mode: All settings applied.
+[2025-02-24 21:04:38.753735] 
+[2025-02-24 21:04:39.076879] 
+[2025-02-24 21:04:39.077879] 
+[2025-02-24 21:04:39.235878] 
+[2025-02-24 21:04:39.235878] ⚡ Setting up advanced PowerShell detection...
+[2025-02-24 21:04:39.389973] ✅ Advanced PowerShell detection operational.
+[2025-02-24 21:08:10.001749] 
+[2025-02-24 21:08:10.282180] 
+[2025-02-24 21:08:10.282180] 
+[2025-02-24 21:08:10.425258] 
+[2025-02-24 21:08:10.425258] ⚡ Setting up advanced PowerShell detection...
+[2025-02-24 21:08:10.573312] ✅ Advanced PowerShell detection operational.
+[2025-02-24 21:09:58.058653] 
+[2025-02-24 21:09:58.346682] 
+[2025-02-24 21:09:58.346682] 
+[2025-02-24 21:09:58.484755] 
+[2025-02-24 21:09:58.484755] ⚡ Setting up advanced PowerShell detection...
+[2025-02-24 21:09:58.627874] ✅ Advanced PowerShell detection operational.
+[2025-02-24 21:15:57.516672] 
+[2025-02-24 21:15:57.823844] 
+[2025-02-24 21:15:57.824845] 
+[2025-02-24 21:15:57.974843] 
+[2025-02-24 21:15:57.974843] ⚡ Setting up advanced PowerShell detection...
+[2025-02-24 21:15:58.125845] ✅ Advanced PowerShell detection operational.
+[2025-02-24 21:19:01.113691] 
+[2025-02-24 21:19:01.406001] 
+[2025-02-24 21:19:01.406001] 
+[2025-02-24 21:19:01.550048] 
+[2025-02-24 21:19:01.550048] ⚡ Setting up advanced PowerShell detection...
+[2025-02-24 21:19:01.700151] ✅ Advanced PowerShell detection operational.
+[2025-02-24 21:22:40.404418] 
+[2025-02-24 21:22:40.695633] 
+[2025-02-24 21:22:40.695633] 
+[2025-02-24 21:22:40.837634] 
+[2025-02-24 21:22:40.837634] ⚡ Setting up advanced PowerShell detection...
+[2025-02-24 21:22:40.989634] ✅ Advanced PowerShell detection operational.
+[2025-02-24 21:32:37.768556] ⚡ Setting up WMI PowerShell detection...
+[2025-02-24 21:32:37.911605] ✅ WMI detection operational.
+[2025-02-24 21:32:49.601877] ⚡ Setting up WMI PowerShell detection...
+[2025-02-24 21:32:49.723997] ✅ WMI detection operational.
+[2025-02-24 21:43:24.877347] ✅ ShellClawUI Initialized
+[2025-02-24 21:45:30.605305] ✅ ShellClawUI Initialized
+[2025-02-24 21:45:41.627448] ⚡ Setting up WMI PowerShell detection...
+[2025-02-24 21:45:41.753444] ✅ WMI detection operational.
+[2025-02-24 21:49:46.975958] ✅ ShellClawUI Initialized
+[2025-02-24 21:49:58.561546] ⚡ Setting up WMI PowerShell detection...
+[2025-02-24 21:49:58.827341] ✅ WMI detection operational.
+[2025-02-24 21:50:00.196870] ⚡ Setting up WMI PowerShell detection...
+[2025-02-24 21:50:00.444325] ✅ WMI detection operational.

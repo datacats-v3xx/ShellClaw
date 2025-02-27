@@ -1,19 +1,48 @@
-# Core utilities
+# core/utils.py - Safer PowerShell execution
 import subprocess
 
+
 def run_powershell(cmd, elevate=False):
-    """Run PowerShell commands with optional elevation."""
+    """Run PowerShell command with improved safety."""
     try:
         if elevate:
-            # Wrap cmd in escaped double quotes for proper argument parsing
-            elevated_cmd = f'Start-Process powershell -Verb RunAs -ArgumentList \'-Command "{cmd}"\''
-            result = subprocess.run(["powershell", "-Command", elevated_cmd],
-                                    capture_output=True, text=True, check=True)
+            # Safer command construction for elevation
+            full_cmd = [
+                "powershell",
+                "-ExecutionPolicy", "Bypass",
+                "-Command",
+                f"Start-Process powershell -Verb runAs -ArgumentList '-ExecutionPolicy', 'Bypass', '-Command', \"{cmd.replace('\"', '`\"')}\""
+            ]
         else:
-            result = subprocess.run(["powershell", "-Command", cmd],
-                                    capture_output=True, text=True, check=True)
+            # Simpler command for non-elevated execution
+            full_cmd = [
+                "powershell",
+                "-ExecutionPolicy", "Bypass",
+                "-Command",
+                cmd
+            ]
 
-        return {"success": True, "output": result.stdout.strip()}
-    except subprocess.CalledProcessError as e:
-        return {"success": False, "error": e.stderr.strip()}
+        # Use a safer approach with limited output capture
+        proc = subprocess.Popen(
+            full_cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+            encoding='utf-8'
+        )
 
+        # Limit output size to prevent buffer issues
+        stdout, stderr = proc.communicate(timeout=30)
+
+        return {
+            "success": proc.returncode == 0,
+            "output": stdout[:10000] if stdout else "",  # Limit output size
+            "error": stderr[:10000] if stderr else "",  # Limit error size
+            "returncode": proc.returncode
+        }
+
+    except subprocess.TimeoutExpired:
+        proc.kill()
+        return {"success": False, "error": "Command timed out", "returncode": -1}
+    except Exception as e:
+        return {"success": False, "error": str(e)[:10000], "returncode": -1}

@@ -1,19 +1,53 @@
 # core/hardening.py
-from core.utils import run_powershell
+import subprocess
+
+
+def run_powershell(cmd):
+    """Run PowerShell silently."""
+    try:
+        result = subprocess.run(
+            ["powershell", "-WindowStyle", "Hidden", "-ExecutionPolicy", "Bypass", "-Command", cmd],
+            capture_output=True, text=True, check=True
+        )
+        return {"success": True, "output": result.stdout.strip()}
+    except subprocess.CalledProcessError as e:
+        return {"success": False, "error": e.stderr.strip()}
+
 
 def set_execution_policy(policy="AllSigned"):
-    """Set PowerShell execution policy securely (requires elevation)."""
-    cmd = f"Set-ExecutionPolicy -Scope LocalMachine -ExecutionPolicy {policy} -Force"
-    return run_powershell(cmd, elevate=True)
+    return run_powershell(f"Set-ExecutionPolicy {policy} -Scope LocalMachine -Force")
+
 
 def enable_logging():
-    """Enable critical PowerShell logging for forensics (requires elevation)."""
-    cmds = [
-        'Set-ItemProperty -Path "HKLM:\\SOFTWARE\\Microsoft\\PowerShell\\1\\ShellIds\\Microsoft.PowerShell" -Name "ScriptBlockLogging" -Value @{Enable=$true}',
-        'Set-ItemProperty -Path "HKLM:\\SOFTWARE\\Microsoft\\PowerShell\\1\\ShellIds\\Microsoft.PowerShell" -Name "ModuleLogging" -Value @{Enable=$true}'
-    ]
-    return [run_powershell(cmd, elevate=True) for cmd in cmds]
+    """Enable PowerShell logging by ensuring registry paths exist first."""
+    from core.utils import run_powershell
+    results = []
+
+    # 💡 PowerShell script to create registry paths if missing and set logging
+    ps_script = """
+    $scriptBlockPath = 'HKLM:\\Software\\Policies\\Microsoft\\Windows\\PowerShell\\ScriptBlockLogging'
+    $transcriptionPath = 'HKLM:\\Software\\Policies\\Microsoft\\Windows\\PowerShell\\Transcription'
+
+    # ✅ Ensure ScriptBlockLogging path exists
+    if (-not (Test-Path $scriptBlockPath)) {
+        New-Item -Path $scriptBlockPath -Force
+    }
+    Set-ItemProperty -Path $scriptBlockPath -Name 'EnableScriptBlockLogging' -Value 1
+    Set-ItemProperty -Path $scriptBlockPath -Name 'EnableScriptBlockInvocationLogging' -Value 1
+
+    # ✅ Ensure Transcription path exists
+    if (-not (Test-Path $transcriptionPath)) {
+        New-Item -Path $transcriptionPath -Force
+    }
+    Set-ItemProperty -Path $transcriptionPath -Name 'EnableTranscripting' -Value 1
+    Set-ItemProperty -Path $transcriptionPath -Name 'OutputDirectory' -Value 'C:\\Windows\\Temp\\PS_Transcripts'
+    """
+
+    # 🏃 Execute PowerShell and return results
+    result = run_powershell(ps_script)
+    results.append(result)
+    return results
+
 
 def disable_ps_v2():
-    """Disable legacy PowerShell v2 (requires elevation)."""
-    return run_powershell("Disable-WindowsOptionalFeature -Online -FeatureName MicrosoftWindowsPowerShellV2Root -NoRestart", elevate=True)
+    return run_powershell('Disable-WindowsOptionalFeature -Online -FeatureName MicrosoftWindowsPowerShellV2Root -NoRestart')

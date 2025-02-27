@@ -1,0 +1,11 @@
+{
+    "dark_mode": true,
+    "auto_refresh_logs": true,
+    "refresh_interval": 5000,
+    "default_hardening": [
+        "execution_policy",
+        "ps_logging",
+        "disable_v2"
+    ],
+    "log_path": "logs/shellclaw_log.txt"
+}

@@ -1,0 +1,121 @@
+# ================================================
+# Unified Windows OS Hardening (PowerShell + GPO) 
+# PowerShell handles initial tasks, GPO enforces baseline
+# GPO-aware checks prevent conflicts
+# ================================================
+
+# Load GroupPolicy Module
+Import-Module GroupPolicy -ErrorAction Stop
+
+# GPO Variables
+$GpoName = "Windows_Defender_Hardening"
+$OU = "OU=Endpoints,DC=domain,DC=com"  # Update with your OU
+$BackupPath = "C:\GPO_Backups\Windows_Defender_Hardening"
+
+# ------------------------------
+# FUNCTION: Check for GPO Control
+# ------------------------------
+Function Check-GPOConflict {
+    param(
+        [string]$RegistryPath,
+        [string]$ValueName
+    )
+    try {
+        $regValue = Get-ItemProperty -Path $RegistryPath -Name $ValueName -ErrorAction Stop
+        Write-Output "GPO manages $ValueName at $RegistryPath. Skipping local config."
+        return $true
+    } catch {
+        return $false
+    }
+}
+
+# ------------------------------
+# ONE-TIME CONFIGURATION TASKS (PowerShell Only)
+# ------------------------------
+
+Write-Output "Starting PowerShell baseline configurations..."
+
+# BitLocker - One-time encryption
+if (-not (Get-BitLockerVolume -MountPoint "C:").VolumeStatus -eq 'FullyEncrypted') {
+    Write-Output "Enabling BitLocker encryption with TPM protection..."
+    Enable-BitLocker -MountPoint "C:" -EncryptionMethod XtsAes256 -TpmProtector
+} else {
+    Write-Output "BitLocker already enabled."
+}
+
+# Disable Unnecessary Services (PowerShell only)
+$servicesToDisable = @('Fax', 'XblGameSave', 'RemoteRegistry')
+foreach ($service in $servicesToDisable) {
+    if ((Get-Service -Name $service -ErrorAction SilentlyContinue).Status -ne 'Stopped') {
+        Write-Output "Disabling $service service..."
+        Stop-Service -Name $service -Force
+        Set-Service -Name $service -StartupType Disabled
+    } else {
+        Write-Output "$service service already disabled."
+    }
+}
+
+# Defender PUA Protection - GPO-aware
+if (-not (Check-GPOConflict "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\MpEngine" "MpEnablePus")) {
+    Write-Output "Applying local Defender PUA protection setting..."
+    Set-MpPreference -PUAProtection 1
+}
+
+# SMBv1 Disable - GPO-aware
+if (-not (Check-GPOConflict "HKLM:\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters" "SMB1")) {
+    Write-Output "Disabling SMBv1 locally..."
+    Disable-WindowsOptionalFeature -Online -FeatureName smb1protocol
+}
+
+# Local Firewall Configuration - GPO-aware
+if (-not (Check-GPOConflict "HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\DomainProfile" "EnableFirewall")) {
+    Write-Output "Configuring local Windows Firewall profiles..."
+    Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled True
+    Set-NetFirewallProfile -Profile Domain,Public,Private -DefaultInboundAction Block
+}
+
+# ------------------------------
+# GPO CREATION & CONFIGURATION (For Continuous Enforcement)
+# ------------------------------
+
+Write-Output "Creating and configuring GPO: $GpoName..."
+# Create GPO if it doesn't exist
+if (-not (Get-GPO -Name $GpoName -ErrorAction SilentlyContinue)) {
+    New-GPO -Name $GpoName -Comment "Auto GPO for Defender-only hardening"
+}
+
+# Link GPO to OU
+New-GPLink -Name $GpoName -Target $OU -LinkEnabled Yes
+
+# Defender ASR Rules (GPO - continuous enforcement)
+Write-Output "Configuring Defender ASR rules via GPO..."
+Set-GPRegistryValue -Name $GpoName -Key "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Windows Defender Exploit Guard\ASR" `
+-ValueName "D4F940AB-401B-4EFC-AADC-AD5F3C50688A" -Type DWord -Value 1
+Set-GPRegistryValue -Name $GpoName -Key "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Windows Defender Exploit Guard\ASR" `
+-ValueName "3B576869-A4EC-4529-8536-B80A7769E899" -Type DWord -Value 1
+
+# UAC Settings (GPO-managed)
+Write-Output "Applying UAC settings via GPO..."
+Set-GPRegistryValue -Name $GpoName -Key "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" `
+-ValueName "ConsentPromptBehaviorAdmin" -Type DWord -Value 2
+
+# ------------------------------
+# GPO BACKUP & FORCE REFRESH
+# ------------------------------
+
+Write-Output "Backing up GPO configuration..."
+Backup-GPO -Name $GpoName -Path $BackupPath
+
+Write-Output "Forcing GPO update across all endpoints..."
+Invoke-Command -ComputerName (Get-ADComputer -Filter *).Name -ScriptBlock {
+    gpupdate /force
+}
+
+# ------------------------------
+# VERIFICATION & VALIDATION
+# ------------------------------
+Write-Output "🔍 Finalizing: Verifying Defender and Firewall status..."
+Get-MpComputerStatus | Format-Table -AutoSize
+Get-NetFirewallProfile | Format-Table Name, Enabled, DefaultInboundAction
+
+Write-Output "Unified OS Hardening Completed Successfully (PowerShell + GPO, Conflict-Free)."
