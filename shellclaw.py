@@ -10,7 +10,7 @@ def main():
     app = QApplication(sys.argv)
     window = ShellClawUI()
     window.show()
-    print("💡 Entering main event loop...")
+    print(" Entering main event loop...")
     sys.exit(app.exec_())
 
 

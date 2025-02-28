@@ -23,19 +23,19 @@ def enable_logging():
     from core.utils import run_powershell
     results = []
 
-    # 💡 PowerShell script to create registry paths if missing and set logging
+    # PS script to create registry paths if missing and set logging
     ps_script = """
     $scriptBlockPath = 'HKLM:\\Software\\Policies\\Microsoft\\Windows\\PowerShell\\ScriptBlockLogging'
     $transcriptionPath = 'HKLM:\\Software\\Policies\\Microsoft\\Windows\\PowerShell\\Transcription'
 
-    # ✅ Ensure ScriptBlockLogging path exists
+    # Ensure ScriptBlockLogging path exists
     if (-not (Test-Path $scriptBlockPath)) {
         New-Item -Path $scriptBlockPath -Force
     }
     Set-ItemProperty -Path $scriptBlockPath -Name 'EnableScriptBlockLogging' -Value 1
     Set-ItemProperty -Path $scriptBlockPath -Name 'EnableScriptBlockInvocationLogging' -Value 1
 
-    # ✅ Ensure Transcription path exists
+    # Ensure Transcription path exists
     if (-not (Test-Path $transcriptionPath)) {
         New-Item -Path $transcriptionPath -Force
     }
@@ -43,7 +43,7 @@ def enable_logging():
     Set-ItemProperty -Path $transcriptionPath -Name 'OutputDirectory' -Value 'C:\\Windows\\Temp\\PS_Transcripts'
     """
 
-    # 🏃 Execute PowerShell and return results
+    # Execute PS and return results
     result = run_powershell(ps_script)
     results.append(result)
     return results

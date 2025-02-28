@@ -8,7 +8,7 @@ class ProcessListWorker(QThread):
     def watch_ps_scripts(watch_dir="C:\\Users\\Public\\"):
         import time
         import os
-        print(f"👀 Watching directory: {watch_dir}")
+        print(f"Watching directory: {watch_dir}")
         tracked = set(os.listdir(watch_dir))
         while True:
             time.sleep(5)  # Keep thread alive
@@ -92,7 +92,7 @@ class HardeningWorker(QThread):
         self.finished.emit()
 
     if __name__ == "__main__":
-        print("🧵 Starting thread tests...")  # Debug print to confirm execution
+        print(" Starting thread tests...")  # Debug print to confirm execution
         # Example thread start
         from core.detection import watch_ps_scripts
         import threading

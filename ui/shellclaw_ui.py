@@ -189,7 +189,7 @@ class ShellClawUI(QWidget):
             from core.settings import load_settings
             settings = load_settings()
 
-            # ✅ FIXED: Corrected the checkbox reference
+            # Corrected the checkbox reference
             self.settings_tab.dark_mode.setChecked(settings.get("dark_mode", False))
 
             # Apply log refresh settings
@@ -208,6 +208,6 @@ class ShellClawUI(QWidget):
             self.disable_v2_checkbox.setChecked("disable_v2" in default_hardening)
             self.wmi_detection_checkbox.setChecked("wmi_detection" in default_hardening)
 
-            self.output_console.append("✅ Settings applied")
+            self.output_console.append("Settings applied")
         except Exception as e:
-            self.output_console.append(f"⚠️ Error applying settings: {str(e)}")
+            self.output_console.append(f" Error applying settings: {str(e)}")

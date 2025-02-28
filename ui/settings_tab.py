@@ -78,7 +78,7 @@ class SettingsTab(QWidget):
             from core.settings import load_settings
             settings = load_settings()
 
-            # ✅ Fixed the dark mode reference
+            # Pesky dark mode reference.
             self.settings_tab.dark_mode.setChecked(settings.get("dark_mode", False))
 
             # Apply log refresh settings

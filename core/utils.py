@@ -6,7 +6,7 @@ def run_powershell(cmd, elevate=False):
     """Run PowerShell command with improved safety."""
     try:
         if elevate:
-            # Safer command construction for elevation
+            # command construction for elevation
             full_cmd = [
                 "powershell",
                 "-ExecutionPolicy", "Bypass",
@@ -14,7 +14,7 @@ def run_powershell(cmd, elevate=False):
                 f"Start-Process powershell -Verb runAs -ArgumentList '-ExecutionPolicy', 'Bypass', '-Command', \"{cmd.replace('\"', '`\"')}\""
             ]
         else:
-            # Simpler command for non-elevated execution
+            # non-elevated execution
             full_cmd = [
                 "powershell",
                 "-ExecutionPolicy", "Bypass",
@@ -22,7 +22,7 @@ def run_powershell(cmd, elevate=False):
                 cmd
             ]
 
-        # Use a safer approach with limited output capture
+        # limited output capture
         proc = subprocess.Popen(
             full_cmd,
             stdout=subprocess.PIPE,

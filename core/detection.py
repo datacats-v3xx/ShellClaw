@@ -27,7 +27,7 @@ def main():
 
 def some_detection_function():
     from core.forensics import log_detection  # Import inside the function
-    log_detection("🚨 Detection triggered!")
+    log_detection(" Detection triggered!")
 
 def create_wmi_detection():
     """Create basic WMI detection for PowerShell bypass attempts."""
@@ -77,14 +77,14 @@ def watch_ps_scripts(watch_dir="C:\\Users\\Public\\"):
         try:
             time.sleep(5)
 
-            # Safely get current files
+            # get current files
             try:
                 current = set(os.listdir(watch_dir))
             except Exception as e:
                 logging.error(f"Error listing directory: {str(e)}")
                 continue
 
-            # Find new files
+            # find new files
             new_files = current - tracked
             for f in new_files:
                 if f.endswith('.ps1'):
@@ -110,7 +110,7 @@ def create_safer_wmi_detection():
 
     log_detection("⚡ Setting up safer PowerShell detection...")
 
-    # Use a much simpler command that's less likely to cause memory issues
+    # much simpler
     ps_script = """
     # Create a simple log file for PowerShell detection
     $logPath = "C:\\Users\\Public\\shellclaw_ps_detect.log"

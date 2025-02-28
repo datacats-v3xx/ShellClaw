@@ -13,7 +13,7 @@ def start_registry_monitoring():
 
 def _registry_monitor_thread():
     """Background thread that monitors registry changes."""
-    log_detection("⚙️ Registry monitoring started")
+    log_detection(" Registry monitoring started")
 
     # PowerShell script to create WMI event for registry changes
     ps_script = """
@@ -62,6 +62,6 @@ def _registry_monitor_thread():
                             log_detection(line)
                     last_size = current_size
         except Exception as e:
-            log_detection(f"❌ Registry monitor error: {str(e)}")
+            log_detection(f" Registry monitor error: {str(e)}")
 
         time.sleep(10)  # Check every 10 seconds

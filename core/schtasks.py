@@ -42,4 +42,4 @@ def create_wmi_detection():
     subprocess.run(["schtasks", "/Delete", "/TN", "ShellClawWMISetup", "/F"], check=True)
     subprocess.run(["del", "C:\\ShellClawWMISetup.ps1"], shell=True, check=True)
 
-    log_detection("✅ WMI subscriptions created via SYSTEM context.")
+    log_detection(" WMI subscriptions created via SYSTEM context.")

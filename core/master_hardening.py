@@ -4,8 +4,8 @@ from core.utils import run_powershell
 
 def initialize():
     """Initialize the module."""
-    log_detection("✅ Master hardening module loaded successfully.")
-    print("✅ Master hardening module initialized.")
+    log_detection(" Master hardening module loaded successfully.")
+    print(" Master hardening module initialized.")
     return True
 
 def run_powershell_script(script_path):
